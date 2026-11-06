@@ -182,13 +182,17 @@ $('hero').addEventListener('pointerdown', e=>{ if(e.target.id!=='boom' && !reduc
 $('boom').addEventListener('click', ()=>{ if(reduce){ frame(); } show(8); });
 
 /* ===== Карусель ===== */
+const EXTS = ['JPG','jpg','jpeg','JPEG','png','PNG','webp'];
 const P = CONFIG.photos, stage = $('stage'), dots = $('dots');
 let cur = 0, timer;
 const cards = P.map((p,i)=>{
   const el = document.createElement('figure'); el.className='card';
   const ph = document.createElement('div'); ph.className='ph';
-  const img = new Image(); img.alt = p.caption||''; img.draggable=false; img.src = p.src;
-  img.onerror = ()=>{ img.remove(); ph.textContent='🎂'; };
+  const img = new Image(); img.alt = p.caption||''; img.draggable=false;
+  const base = p.src.replace(/\.\w+$/,''), list = [p.src, ...EXTS.map(e=>`${base}.${e}`).filter(u=>u!==p.src)];
+  let k = 0;
+  img.onerror = ()=>{ if(++k<list.length) img.src=list[k]; else { img.remove(); ph.textContent='🎂'; } };
+  img.src = list[0];
   ph.appendChild(img);
   const cap = document.createElement('p'); cap.textContent = p.caption||'';
   el.append(ph, cap); stage.appendChild(el);
