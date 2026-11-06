@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>С днём рождения!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14102b; --plum:#2b1a52; --coral:#ff5d73; --gold:#ffc861; --mint:#6ef3c5; --cream:#fff6e8;
+  --display:'Unbounded','Arial Black',system-ui,sans-serif; --body:'Manrope',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--cream);font:400 1.05rem/1.6 var(--body);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-20%;z-index:-2;
+  background:radial-gradient(40% 40% at 25% 30%,#5b2a8a88,transparent 70%),
+             radial-gradient(35% 35% at 75% 60%,#ff5d7355,transparent 70%),
+             radial-gradient(30% 30% at 50% 85%,#6ef3c533,transparent 70%);
+  animation:drift 18s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(6%,-4%) rotate(8deg) scale(1.1)}}
+#fx{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+
+.hero{min-height:100svh;display:grid;place-content:center;text-align:center;padding:2rem 1.2rem;cursor:pointer}
+.hero small{font-size:1.1rem;color:var(--gold);letter-spacing:.02em}
+h1{font:800 clamp(2rem,9vw,7rem)/1 var(--display);margin:.6rem 0 1rem;letter-spacing:-.03em}
+h1 .l{display:inline-block;opacity:0;animation:drop .9s cubic-bezier(.2,1.4,.4,1) forwards,bob 3s ease-in-out infinite}
+h1 .l:nth-child(odd){color:var(--coral)} h1 .l:nth-child(even){color:var(--cream)} h1 .l:nth-child(3n){color:var(--gold)}
+@keyframes drop{from{opacity:0;transform:translateY(-120vh) rotate(-40deg)}to{opacity:1;transform:none}}
+@keyframes bob{50%{transform:translateY(-.08em)}}
+.age{font:800 clamp(1rem,3vw,1.6rem) var(--display);color:var(--mint);margin-bottom:1.6rem}
+.sub{max-width:34ch;margin:0 auto 2rem;font-size:1.2rem}
+.btn{font:600 1rem var(--body);background:var(--coral);color:#fff;border:0;border-radius:99px;padding:.9rem 1.8rem;cursor:pointer;
+  box-shadow:0 8px 30px #ff5d7388;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:scale(1.06) rotate(-2deg);box-shadow:0 10px 40px #ff5d73bb}
+.btn:focus-visible,.nav:focus-visible,.dot:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+
+section.photos{padding:5rem 0 3rem;text-align:center}
+h2{font:800 clamp(1.6rem,5vw,2.8rem) var(--display);margin-bottom:2rem;padding:0 1rem}
+.stage{position:relative;height:min(480px,110vw);perspective:1200px;touch-action:pan-y;user-select:none}
+.card{position:absolute;left:50%;top:0;width:min(300px,68vw);margin-left:calc(min(300px,68vw)/-2);background:var(--cream);color:var(--ink);
+  padding:12px 12px 14px;border-radius:6px;box-shadow:0 20px 50px #0009;transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s,filter .7s}
+.card .ph{aspect-ratio:3/4;border-radius:3px;overflow:hidden;display:grid;place-items:center;font-size:4rem;
+  background:linear-gradient(135deg,var(--coral),var(--gold) 55%,var(--mint))}
+.card img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.card p{font:600 .95rem var(--body);padding-top:.6rem;min-height:2rem}
+.ctrl{display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:1.5rem}
+.nav{width:48px;height:48px;border-radius:50%;border:2px solid var(--cream);background:none;color:var(--cream);font-size:1.3rem;cursor:pointer;transition:background .2s,color .2s}
+.nav:hover{background:var(--cream);color:var(--ink)}
+.dots{display:flex;gap:.5rem}
+.dot{width:10px;height:10px;border-radius:50%;border:0;background:#fff4;cursor:pointer;transition:all .3s}
+.dot.on{background:var(--gold);width:28px;border-radius:6px}
+
+.speech{max-width:900px;margin:3rem auto 2rem;padding:0 1.4rem}
+.speech p{font:600 clamp(1.35rem,3.6vw,2.2rem)/1.4 var(--body);margin-bottom:1.8rem;opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.speech p:first-child{font:800 clamp(1.8rem,5.5vw,3.4rem)/1.15 var(--display);color:var(--gold)}
+.speech p.in{opacity:1;transform:none}
+.band{overflow:hidden;border-block:2px solid #fff3;padding:1.1rem 0;margin:3rem 0;transform:rotate(-1.5deg);background:#ffffff0a}
+.track{display:flex;width:max-content;gap:2.5rem;font:800 clamp(1.3rem,4vw,2.2rem) var(--display);animation:run 30s linear infinite}
+.track span:nth-child(even){color:var(--gold)}
+@keyframes run{to{transform:translateX(-50%)}}
+
+footer{text-align:center;padding:2rem 1rem 5rem;font-size:1.2rem}
+footer small{display:block;margin-top:3rem;font-size:.8rem;opacity:.55}
+footer b{display:block;font:800 1.6rem var(--display);color:var(--coral);margin-top:.4rem}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  h1 .l{opacity:1}
+  .speech p{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<header class="hero" id="hero">
+  <small id="kicker">Сегодня твой день</small>
+  <h1 id="title" aria-label="С днём рождения"></h1>
+  <div class="age" id="age"></div>
+  <p class="sub" id="sub"></p>
+  <div><button class="btn" id="boom">Запустить салют</button></div>
+</header>
+
+<section class="photos">
+  <h2>Наши лучшие кадры</h2>
+  <div class="stage" id="stage" role="region" aria-label="Карусель фотографий"></div>
+  <div class="ctrl">
+    <button class="nav" id="prev" aria-label="Назад">‹</button>
+    <div class="dots" id="dots"></div>
+    <button class="nav" id="next" aria-label="Вперёд">›</button>
+  </div>
+</section>
+
+<section class="speech" id="speech" aria-label="Поздравление"></section>
+
+<div class="band" aria-hidden="true"><div class="track" id="track"></div></div>
+
+<footer>
+  <p id="msg"></p>
+  <b id="sign"></b>
+  <small id="credit"></small>
+</footer>
+
+<script>
+/* ========= НАСТРОЙКИ — меняй здесь ========= */
+const CONFIG = {
+  name: "Мейрамгуль",                       // имя именинника
+  age: "",                             // например "50 лет" или оставьте пустым
+  greeting: "С днём рождения,",        // верхняя строка над именем
+  subtitle: "Пусть наступающий год подарит вам больше радости, чем все предыдущие.",
+  wishes: ["Здоровья","Счастья","Любви","Смелых идей","Тёплых встреч","Безграничной радости","Исполнения мечт"],
+  message: "Вы делаете мир вокруг светлее. Спасибо, что вы есть!",
+  signature: "С теплом и уважением, ваши близкие",
+  credit: "Этот сайт для вас сделал Алимжан",
+  speech: [
+    "Дорогая Мейрамгуль! От всей души поздравляем вас с днём рождения!",
+    "Пусть каждый день этого года начинается с хорошего настроения и заканчивается тёплым вечером в кругу близких.",
+    "Желаем вам крепкого здоровья, спокойствия в доме, радости от каждой мелочи и исполнения самых заветных желаний.",
+    "Спасибо вам за доброту, мудрость и тепло, которыми вы делитесь с нами. Рядом с вами всегда уютно.",
+    "Пусть жизнь дарит вам только поводы для улыбки. С праздником!"
+  ],
+  // Положи фото в папку photos/ рядом с index.html и перечисли их здесь
+  photos: [
+    {src:"photos/1.jpg", caption:"Тот самый день"},
+    {src:"photos/2.jpg", caption:"Лучшая компания"},
+    {src:"photos/3.jpg", caption:"Не забыть никогда"},
+    {src:"photos/4.jpg", caption:"Моменты счастья"},
+    {src:"photos/5.jpg", caption:"Вместе навсегда"}
+  ]
+};
+/* ============================================ */
+
+const $ = id => document.getElementById(id);
+const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.title = `${CONFIG.greeting} ${CONFIG.name}!`;
+$('kicker').textContent = CONFIG.greeting;
+$('sub').textContent = CONFIG.subtitle;
+$('msg').textContent = CONFIG.message;
+$('sign').textContent = CONFIG.signature;
+$('credit').textContent = CONFIG.credit;
+CONFIG.speech.forEach(t=>{ const p=document.createElement('p'); p.textContent=t; $('speech').appendChild(p); });
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.3}) : null;
+document.querySelectorAll('.speech p').forEach(p=> io ? io.observe(p) : p.classList.add('in'));
+$('age').textContent = CONFIG.age;
+$('title').setAttribute('aria-label', CONFIG.name);
+[...CONFIG.name].forEach((ch,i)=>{
+  const s = document.createElement('span'); s.className='l'; s.textContent=ch;
+  s.style.animationDelay = `${i*0.12+0.3}s, ${i*0.12+1.4}s`;
+  $('title').appendChild(s);
+});
+const w = CONFIG.wishes.map(t=>`<span>${t} ✦</span>`).join('');
+$('track').innerHTML = w + w;
+
+/* ===== Салют ===== */
+const cv = $('fx'), ctx = cv.getContext('2d');
+let W, H, parts = [], dpr = Math.min(devicePixelRatio||1, 2);
+function resize(){ W=innerWidth; H=innerHeight; cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); }
+addEventListener('resize', resize); resize();
+const COLORS = ['#ff5d73','#ffc861','#6ef3c5','#fff6e8','#b98cff'];
+function burst(x, y, n=70){
+  const c = COLORS[Math.random()*COLORS.length|0], c2 = COLORS[Math.random()*COLORS.length|0];
+  for(let i=0;i<n;i++){
+    const a = Math.random()*Math.PI*2, v = 1.5+Math.random()*5;
+    parts.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v,life:1,d:.008+Math.random()*.012,c:i%3?c:c2,r:1.5+Math.random()*2});
+  }
+}
+function frame(){
+  ctx.globalCompositeOperation='destination-out'; ctx.fillStyle='rgba(0,0,0,.18)'; ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation='lighter';
+  parts = parts.filter(p=>p.life>0);
+  for(const p of parts){
+    p.vy+=.045; p.vx*=.985; p.vy*=.985; p.x+=p.vx; p.y+=p.vy; p.life-=p.d;
+    ctx.globalAlpha=Math.max(p.life,0); ctx.fillStyle=p.c;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.283); ctx.fill();
+  }
+  ctx.globalAlpha=1; requestAnimationFrame(frame);
+}
+function auto(){ burst(W*(.15+Math.random()*.7), H*(.12+Math.random()*.4)); setTimeout(auto, 1400+Math.random()*1800); }
+function show(n=6){ for(let i=0;i<n;i++) setTimeout(()=>burst(W*(.1+Math.random()*.8),H*(.1+Math.random()*.5),90), i*220); }
+if(!reduce){ frame(); setTimeout(()=>show(5), 2200); setTimeout(auto, 4000); }
+$('hero').addEventListener('pointerdown', e=>{ if(e.target.id!=='boom' && !reduce) burst(e.clientX,e.clientY,80); });
+$('boom').addEventListener('click', ()=>{ if(reduce){ frame(); } show(8); });
+
+/* ===== Карусель ===== */
+const P = CONFIG.photos, stage = $('stage'), dots = $('dots');
+let cur = 0, timer;
+const cards = P.map((p,i)=>{
+  const el = document.createElement('figure'); el.className='card';
+  const ph = document.createElement('div'); ph.className='ph';
+  const img = new Image(); img.alt = p.caption||''; img.draggable=false; img.src = p.src;
+  img.onerror = ()=>{ img.remove(); ph.textContent='🎂'; };
+  ph.appendChild(img);
+  const cap = document.createElement('p'); cap.textContent = p.caption||'';
+  el.append(ph, cap); stage.appendChild(el);
+  el.addEventListener('click', ()=>go(i));
+  const d = document.createElement('button'); d.className='dot'; d.setAttribute('aria-label',`Фото ${i+1}`);
+  d.onclick = ()=>go(i); dots.appendChild(d);
+  return el;
+});
+function layout(){
+  const n = P.length, narrow = innerWidth < 600;
+  cards.forEach((el,i)=>{
+    let o = ((i-cur)%n+n)%n; if(o>n/2) o-=n;
+    const a = Math.abs(o), vis = a<=2;
+    el.style.transform = `translateX(${o*(narrow?42:62)}%) translateZ(${-a*140}px) rotateY(${-o*28}deg) rotate(${o*3}deg) scale(${a?1-a*.06:1.04})`;
+    el.style.opacity = vis ? 1-a*.3 : 0;
+    el.style.filter = a ? `brightness(${1-a*.25})` : 'none';
+    el.style.zIndex = 10-a; el.style.pointerEvents = vis ? 'auto':'none';
+  });
+  [...dots.children].forEach((d,i)=>d.classList.toggle('on', i===cur));
+}
+function go(i){ cur=(i+P.length)%P.length; layout(); restart(); }
+function restart(){ clearInterval(timer); if(!reduce) timer=setInterval(()=>go(cur+1), 4500); }
+$('prev').onclick = ()=>go(cur-1); $('next').onclick = ()=>go(cur+1);
+addEventListener('keydown', e=>{ if(e.key==='ArrowLeft') go(cur-1); if(e.key==='ArrowRight') go(cur+1); });
+let sx=null;
+stage.addEventListener('pointerdown', e=>{ sx=e.clientX; });
+addEventListener('pointerup', e=>{ if(sx===null) return; const dx=e.clientX-sx; sx=null; if(Math.abs(dx)>40) go(cur+(dx<0?1:-1)); });
+addEventListener('resize', layout);
+layout(); restart();
+</script>
+</body>
+</html>
